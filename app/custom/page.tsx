@@ -1,25 +1,9 @@
 'use client'
 
-import { chain, configureChains, createClient, WagmiConfig } from 'wagmi'
-import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
-import { publicProvider } from 'wagmi/providers/public'
+import { WagmiConfig } from 'wagmi'
 import Account from '../../components/Account'
 import ConnectButton from './ConnectButton'
-
-const { provider, chains } = configureChains(
-  [chain.polygon],
-  [publicProvider()]
-)
-
-const walletConnectConnector = new WalletConnectConnector({
-  chains,
-  options: { qrcode: false },
-})
-
-const wagmiClient = createClient({
-  connectors: [walletConnectConnector],
-  provider: provider,
-})
+import { wagmiClient } from './wagmi'
 
 export default function Page() {
   return (

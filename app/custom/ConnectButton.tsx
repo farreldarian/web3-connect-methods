@@ -1,5 +1,6 @@
-import { Connector, useConnect, useNetwork } from 'wagmi'
+import { Connector, useConnect } from 'wagmi'
 import Button from '../../components/Button'
+import { chains } from './wagmi'
 
 type Props = {
   connectorId: string
@@ -8,7 +9,6 @@ type Props = {
 
 export default function ConnectButton({ connectorId, onConnect }: Props) {
   const { connectAsync, connectors } = useConnect()
-  const { chains } = useNetwork()
 
   const connectWallet = async () => {
     const connector = connectors.find((c) => c.id === connectorId)
