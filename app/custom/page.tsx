@@ -5,12 +5,12 @@ import { publicProvider } from 'wagmi/providers/public'
 import Account from '../../components/Account'
 import ConnectButton from './ConnectButton'
 
-export const { provider, chains } = configureChains(
+const { provider, chains } = configureChains(
   [chain.polygon],
   [publicProvider()]
 )
 
-export const wagmiClient = createClient({
+const wagmiClient = createClient({
   connectors: [],
   provider: provider,
 })
