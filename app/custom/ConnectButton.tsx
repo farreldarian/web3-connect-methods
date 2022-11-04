@@ -2,28 +2,24 @@ import { Connector, useConnect, useNetwork } from 'wagmi'
 import Button from '../../components/Button'
 
 type Props = {
-  createConnector: () => Promise<Connector>
+  connectorId: string
+  onConnect: (connector: Connector) => Promise<void> | void
 }
 
-export default function ConnectButton({ createConnector }: Props) {
-  const { connect } = useConnect()
+export default function ConnectButton({ connectorId, onConnect }: Props) {
+  const { connect, connectors } = useConnect()
   const { chains } = useNetwork()
 
   const connectWallet = async () => {
-    const connector = await createConnector()
+    const connector = connectors.find((c) => c.id === connectorId)
+    if (!connector) throw new Error(`No connector with ID '${connectorId}'`)
 
     const getUri = async () =>
       new Promise<void>((resolve) =>
         connector.once('message', async ({ type }) => {
           if (type !== 'connecting') return
 
-          const uri = (await connector.getProvider()).connector.uri
-          window.open(
-            // `https://metamask.app.link/wc?uri=${encodeURIComponent(uri)}`,
-            `metamask://wc?uri=${encodeURIComponent(uri)}`,
-            '_self',
-            'noreferrer noopener'
-          )
+          await onConnect(connector)
           resolve()
         })
       )
