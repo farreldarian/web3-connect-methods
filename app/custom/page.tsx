@@ -15,8 +15,8 @@ export default function Page() {
           onConnect={async (connector) => {
             const uri = (await connector.getProvider()).connector.uri
             window.open(
-              `https://metamask.app.link/wc?uri=${encodeURIComponent(uri)}`,
-              // `metamask://wc?uri=${encodeURIComponent(uri)}`,
+              // `https://metamask.app.link/wc?uri=${encodeURIComponent(uri)}`,
+              `metamask://wc?uri=${encodeURIComponent(uri)}`,
               '_self',
               'noreferrer noopener'
             )
