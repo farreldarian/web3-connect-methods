@@ -14,20 +14,11 @@ export default function ConnectButton({ connectorId, onConnect }: Props) {
     const connector = connectors.find((c) => c.id === connectorId)
     if (!connector) throw new Error(`No connector with ID '${connectorId}'`)
 
-    const getUri = async () =>
-      new Promise<void>((resolve) =>
-        connector.once('message', async ({ type }) => {
-          if (type !== 'connecting') return
-
-          await onConnect(connector)
-          resolve()
-        })
-      )
-
-    await Promise.all([
-      connectAsync({ connector, chainId: chains[0].id }),
-      getUri(),
-    ])
+    connector.once('message', async ({ type }) => {
+      if (type !== 'connecting') return
+      await onConnect(connector)
+    })
+    await connectAsync({ connector, chainId: chains[0].id })
   }
 
   return <Button onClick={connectWallet}>Connect with MetaMask</Button>
