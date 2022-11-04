@@ -1,5 +1,5 @@
 {
-  "name": "my-app",
+  "name": "web3-connect-methods",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -12,11 +12,24 @@
     "@types/node": "18.11.9",
     "@types/react": "18.0.24",
     "@types/react-dom": "18.0.8",
+    "@wagmi/core": "^0.6.9",
+    "@web3modal/ethereum": "2.0.0-beta.1",
+    "@web3modal/react": "2.0.0-beta.1",
+    "connectkit": "^0.0.2",
     "eslint": "8.26.0",
     "eslint-config-next": "13.0.1",
-    "next": "13.0.1",
+    "ethers": "^5.7.2",
+    "next": "13.0.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "typescript": "4.8.4"
+    "typescript": "4.8.4",
+    "wagmi": "^0.7.10"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.13",
+    "postcss": "^8.4.18",
+    "prettier": "^2.7.1",
+    "prettier-plugin-organize-imports": "^3.1.1",
+    "tailwindcss": "^3.2.1"
   }
 }
