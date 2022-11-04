@@ -7,7 +7,7 @@ type Props = {
 }
 
 export default function ConnectButton({ connectorId, onConnect }: Props) {
-  const { connect, connectors } = useConnect()
+  const { connectAsync, connectors } = useConnect()
   const { chains } = useNetwork()
 
   const connectWallet = async () => {
@@ -24,7 +24,10 @@ export default function ConnectButton({ connectorId, onConnect }: Props) {
         })
       )
 
-    await Promise.all([connect({ connector, chainId: chains[0].id }), getUri()])
+    await Promise.all([
+      connectAsync({ connector, chainId: chains[0].id }),
+      getUri(),
+    ])
   }
 
   return <Button onClick={connectWallet}>Connect with MetaMask</Button>
